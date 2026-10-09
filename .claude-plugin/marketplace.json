@@ -1,7 +1,14 @@
 {
   "name": "beads-band",
-  "owner": { "name": "algonormative" },
+  "description": "beads-band: a Claude Code band for beads (br) task queues",
+  "owner": {
+    "name": "algonormative"
+  },
   "plugins": [
-    { "name": "beads-band", "source": "./", "description": "A band above the Claude Code prompt for beads (br) task queues" }
+    {
+      "name": "beads-band",
+      "source": "./",
+      "description": "A band above the Claude Code prompt for beads (br) task queues"
+    }
   ]
 }
