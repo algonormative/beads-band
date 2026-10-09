@@ -1,0 +1,7 @@
+{
+  "name": "beads-band",
+  "owner": { "name": "algonormative" },
+  "plugins": [
+    { "name": "beads-band", "source": "./", "description": "A band above the Claude Code prompt for beads (br) task queues" }
+  ]
+}
