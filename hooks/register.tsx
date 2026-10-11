@@ -56,6 +56,18 @@ export function describe(q: Queue, cfg: Config): string {
   return parts.join(' · ')
 }
 
+/** The queue in a few words for the status line, which every surface draws (the band may not be). */
+export function statusText(q: Queue, cfg: Config): string {
+  if (q.error) return 'beads: unavailable'
+  return `queue ${q.eligible}/${cfg.targetMin}–${cfg.targetMax} · ${q.ready} ready`
+}
+
+/** Pins the queue to the status line, or clears it while the band is hidden. */
+async function pinStatus($: EngineInterface, cfg: Config) {
+  const q = await read($, queue)
+  $.ui.status(q && !(await read($, isHidden)) ? statusText(q, cfg) : undefined)
+}
+
 // What one shell command does to this session's focus. The gate: a
 // `br update <id>` carrying --claim, or -s/--status set to in_progress,
 // claims <id>; `br close <ids>`, or `br update <id>` setting any other
@@ -155,6 +167,7 @@ async function refresh($: EngineInterface, cfg: Config) {
       error: clip(message, 80),
     }))
   }
+  await pinStatus($, cfg)
 }
 
 async function claim($: EngineInterface, cfg: Config, id: string) {
@@ -215,6 +228,7 @@ export const register: Register = (on, options) => {
     const arg = (e.args ?? '').trim()
     if (arg === 'hide' || arg === 'show') {
       await update($, isHidden, () => arg === 'hide')
+      await pinStatus($, cfg)
       return { text: `Beads band ${arg === 'hide' ? 'hidden' : 'shown'}.` }
     }
     await refresh($, cfg)

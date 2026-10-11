@@ -33,6 +33,19 @@ test('summarises the queue from br and routine-queue, on every surface', async (
   }
 })
 
+test('pins the autonomous queue count to the status line; hide clears it, show brings it back', async ($, on) => {
+  mock.clock(on)
+  on('process.run', async (_$, e) => ok(OUTPUTS[e.argv.join(' ')] ?? '[]'))
+  const statuses: (string | undefined)[] = []
+  on('ui.status', async (_$, e) => { statuses.push((e as { text?: string }).text); return { value: undefined } as never })
+  await $.command.run(RUN(''))
+  expect(statuses.at(-1)).toBe('queue 2/10–25 · 20 ready')
+  await $.command.run(RUN('hide'))
+  expect(statuses.at(-1)).toBeUndefined()
+  await $.command.run(RUN('show'))
+  expect(statuses.at(-1)).toBe('queue 2/10–25 · 20 ready')
+})
+
 test('shows an error instead of crashing when br fails', async ($, on) => {
   mock.clock(on)
   on('process.run', async () => ok('', 127))
