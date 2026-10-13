@@ -18,6 +18,8 @@ test('summarises the queue from br and routine-queue, on every surface', async (
     const stdout = OUTPUTS[e.argv.join(' ')]
     return ok(stdout ?? '', stdout ? 0 : 1)
   })
+  // Another mod's band beneath this one: it must still draw under the queue line.
+  on('ui.render', async ($$, e) => { const { Text } = $$.ui.resolve(e); return <Text>beneath</Text> })
 
   const { text } = await $.command.run(RUN(''))
   expect(text).toBe('queue 2 eligible (target 10–25, 10 labeled) · 20 ready · doing: PERIGEE v3 +1 more')
@@ -30,6 +32,7 @@ test('summarises the queue from br and routine-queue, on every surface', async (
     expect(await ui.find({ type: 'Text', text: /◆ beads/ })).toBeDefined()
     expect(await ui.find({ type: 'Text', text: ' 2' })).toBeDefined()
     expect(await ui.find({ type: 'Text', text: '/10–25' })).toBeDefined()
+    expect(await ui.find({ type: 'Text', text: 'beneath' })).toBeDefined()
   }
 })
 

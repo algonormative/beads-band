@@ -253,10 +253,12 @@ export const register: Register = (on, options) => {
       </Text>
     )
 
-    if (q?.error && !f) return <Box>{line('err', [{ text: '◆ beads ', color: 'error' }, { text: q.error, color: 'inactive' }])}</Box>
+    // Other mods' bands stack under this one: hand on to the rest of the chain.
+    const rest = await next(e)
+    if (q?.error && !f) return <Box flexDirection="column"><Box key="beads">{line('err', [{ text: '◆ beads ', color: 'error' }, { text: q.error, color: 'inactive' }])}</Box>{rest ?? null}</Box>
 
     const now = await $.clock.now()
     const lines = layout(q, f, cfg, width, now)
-    return <Box flexDirection="column">{lines.map((parts, i) => line(`l${i}`, parts))}</Box>
+    return <Box flexDirection="column">{lines.map((parts, i) => line(`l${i}`, parts))}{rest ?? null}</Box>
   })
 }
