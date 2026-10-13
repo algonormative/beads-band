@@ -37,6 +37,10 @@ It shares the space above the prompt with other mods' bands. Here it sits above 
 
 <img src="docs/band-with-subagents-plus.png" alt="The beads band stacked above the subagents-plus band" width="560">
 
+In a terminal session, claiming a task switches the band over ([demo/demo.tape](demo/demo.tape), recorded with [VHS](https://github.com/charmbracelet/vhs)):
+
+<img src="demo/terminal.gif" alt="Terminal demo: the band shows the queue, then the claimed task once Claude claims one" width="760">
+
 ## Install
 
 In a Claude Code terminal session, from the algonormative marketplace (add it once):

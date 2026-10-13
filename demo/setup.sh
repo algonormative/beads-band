@@ -5,7 +5,10 @@ set -euo pipefail
 dir="${1:-$(mktemp -d -t beads-band-demo)}"
 mkdir -p "$dir"
 cd "$dir"
+# br stamps records with the acting user; the demo acts as "demo".
+export BD_ACTOR=demo
 git init -q
+printf '.beads/\n' > .gitignore
 br init >/dev/null 2>&1
 add() { br create --title "$1" -t task -p "$2" >/dev/null 2>&1; }
 add "Add a dark mode toggle to settings" 2
