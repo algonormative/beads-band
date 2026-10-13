@@ -1,6 +1,6 @@
 {
   "name": "beads-band",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A band above the Claude Code prompt for beads (br) task queues: queue meter and stats when idle, the task this session claimed when working",
   "author": { "name": "algonormative", "url": "https://github.com/algonormative" },
   "homepage": "https://github.com/algonormative/beads-band",
