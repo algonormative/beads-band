@@ -26,7 +26,14 @@ The band shows a task once a Bash command in this session runs `br update <id>` 
 
 ## Install
 
-In a Claude Code terminal session:
+In a Claude Code terminal session, from the algonormative marketplace (add it once):
+
+```
+/plugin marketplace add algonormative/claude-plugins
+/plugin install beads-band@algonormative
+```
+
+Or from this repository alone:
 
 ```
 /plugin install beads-band --marketplace algonormative/beads-band
