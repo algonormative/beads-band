@@ -83,6 +83,26 @@ claude plugin validate .
 
 The tests stub `br`, so they never read a real queue.
 
+### Re-record the demo
+
+`demo/demo.tape` records `demo/terminal.gif` with [VHS](https://github.com/charmbracelet/vhs) in your own logged-in `claude`. To keep your other plugins out of the recording, give it a settings file that turns every installed plugin off except this one:
+
+```bash
+python3 - > /tmp/beads-band-demo-settings.json <<'EOF'
+import json, os
+s = json.load(open(os.path.expanduser("~/.claude/settings.json")))
+on = {n: n.split("@")[0] == "beads-band" for n in s.get("enabledPlugins", {})}
+out = {"enabledPlugins": on, "theme": "dark", "statusLine": {"type": "command", "command": "true"}}
+out["pluginConfigs"] = {n: {"options": {"beadsDir": "", "queueLabel": "", "queueCommand": ""}} for n in on if on[n]}
+print(json.dumps(out))
+EOF
+DEMO_DIR="$(demo/setup.sh)" DEMO_SETTINGS=/tmp/beads-band-demo-settings.json vhs demo/demo.tape
+```
+
+`pluginConfigs` points the band at the demo project: without it, a band you have configured for another queue shows that queue (and its task titles) in the recording. `demo/setup.sh` runs `br` as the actor `demo` (`BD_ACTOR`), so the demo tasks carry no username.
+
+The settings file only switches plugins for the recording; your own `settings.json` is untouched. Look through the GIF before you publish it: anything your session prints (paths, task titles) ends up in it.
+
 ## License
 
 MIT
