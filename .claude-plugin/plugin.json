@@ -2,18 +2,57 @@
   "name": "beads-band",
   "version": "0.3.1",
   "description": "A band above the Claude Code prompt for beads (br) task queues: queue meter and stats when idle, the task this session claimed when working",
-  "author": { "name": "algonormative", "url": "https://github.com/algonormative" },
+  "author": {
+    "name": "algonormative",
+    "url": "https://github.com/algonormative"
+  },
   "homepage": "https://github.com/algonormative/beads-band",
   "repository": "https://github.com/algonormative/beads-band",
   "license": "MIT",
-  "keywords": ["beads", "br", "tasks", "statusline", "band"],
+  "keywords": [
+    "beads",
+    "br",
+    "tasks",
+    "statusline",
+    "band"
+  ],
   "types": "./types/index.d.ts",
   "userConfig": {
-    "beadsDir": { "type": "string", "title": "Beads directory", "description": "Absolute path of the checkout whose .beads/ the band reads. Empty: the session's own directory", "default": "" },
-    "queueLabel": { "type": "string", "title": "Queue label", "description": "Label marking tasks queued for automation; the meter counts ready tasks carrying it", "default": "autonomy:safe" },
-    "queueCommand": { "type": "string", "title": "Queue command (optional)", "description": "A command (run without a shell) that prints a JSON array of eligible tasks; overrides br ready --label <queueLabel>", "default": "" },
-    "refreshMinutes": { "type": "number", "title": "Refresh interval (minutes)", "description": "How often the band re-reads the queue in the background", "default": 5 },
-    "targetMin": { "type": "number", "title": "Queue target, low end", "description": "Eligible count the meter has to reach", "default": 10 },
-    "targetMax": { "type": "number", "title": "Queue target, high end", "description": "Eligible count that fills the meter", "default": 25 }
+    "beadsDir": {
+      "type": "string",
+      "title": "Beads directory",
+      "description": "Absolute path of the checkout whose .beads/ the band reads. Empty: the session's own directory",
+      "default": ""
+    },
+    "queueLabel": {
+      "type": "string",
+      "title": "Queue label",
+      "description": "Label marking tasks queued for automation; the meter counts ready tasks carrying it",
+      "default": "autonomy:safe"
+    },
+    "queueCommand": {
+      "type": "string",
+      "title": "Queue command (optional)",
+      "description": "A command (run without a shell) that prints a JSON array of eligible tasks; overrides br ready --label <queueLabel>",
+      "default": ""
+    },
+    "refreshMinutes": {
+      "type": "number",
+      "title": "Refresh interval (minutes)",
+      "description": "How often the band re-reads the queue in the background",
+      "default": 5
+    },
+    "targetMin": {
+      "type": "number",
+      "title": "Queue target, low end",
+      "description": "Eligible count the meter has to reach",
+      "default": 10
+    },
+    "targetMax": {
+      "type": "number",
+      "title": "Queue target, high end",
+      "description": "Eligible count that fills the meter",
+      "default": 25
+    }
   }
 }

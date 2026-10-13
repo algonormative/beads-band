@@ -1,8 +1,17 @@
 # beads-band
 
+[![ci](https://github.com/algonormative/beads-band/actions/workflows/ci.yml/badge.svg)](https://github.com/algonormative/beads-band/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/algonormative/beads-band?color=blue)](https://github.com/algonormative/beads-band/releases/latest)
+[![license](https://img.shields.io/github/license/algonormative/beads-band)](LICENSE)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757?logo=claude&logoColor=white)](#install)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-%E2%89%A52.1.295-D97757)](https://code.claude.com/docs/en/plugins/mods/overview)
+[![surfaces](https://img.shields.io/badge/surfaces-desktop%20%C2%B7%20terminal-555)](#install)
+
 A band above the Claude Code prompt for [beads](https://github.com/gastownhall/beads) task queues, read through the `br` CLI ([beads_rust](https://github.com/Dicklesworthstone/beads_rust)).
 
 While you're idle it shows the queue:
+
+<img src="docs/band.png" alt="The beads band above the prompt: queue meter, ready and active counts" width="560">
 
 ```
 ◆ beads  queue ▰▰▰▰▱▱▱▱▱▱ 9/10–25  ·  ready 20  ·  active 3  ·  labeled 12
@@ -23,6 +32,10 @@ Once this session claims a task, the band switches to that task:
 ## When the band switches to a task
 
 The band shows a task once a Bash command in this session runs `br update <id>` with `--claim`, `-s in_progress` or `--status=in_progress`, and the command succeeds. It switches back to the queue when this session runs `br close <id>` or sets that task to any other status. Tasks claimed in other sessions or terminals never take over the band.
+
+It shares the space above the prompt with other mods' bands. Here it sits above [subagents-plus](https://github.com/algonormative/subagents-plus):
+
+<img src="docs/band-with-subagents-plus.png" alt="The beads band stacked above the subagents-plus band" width="560">
 
 ## Install
 
